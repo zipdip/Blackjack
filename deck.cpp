@@ -55,10 +55,12 @@ void Deck::shuffle(){
 //PreConditions: Deck object with at least 1 card remaining
 //deals one card of the deck
 Card Deck::dealCard(){
+    Card dealt;
     if (myIndex < 52){
         myIndex++;
-        return(myCards[myIndex-1]);
+        dealt = myCards[myIndex-1];
     }
+    return dealt;
 }
 
 //size

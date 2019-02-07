@@ -85,6 +85,7 @@ string Card::suitString(Suit s) const{
         return "c";
     if (s == Card::diamonds)
         return "d";
+    return("s");
 }
 
 //rankString
