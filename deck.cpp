@@ -13,21 +13,103 @@ Deck::Deck(){
     for (i=1; i <= 13; i++){
         Card temp(i, s);
         myCards[i-1] = temp;
+        myCards[52 + (i-1)] = temp;
+        myCards[104 + (i-1)] = temp;
+        myCards[156 + (i-1)] = temp;
+        myCards[208 + (i-1)] = temp;
+        myCards[260 + (i-1)] = temp;
+        myCards[312 + (i-1)] = temp;
+        myCards[364 + (i-1)] = temp;
     }
     s = Card::clubs;
     for (i=1; i <= 13; i++){
         Card temp(i, s);
         myCards[i+12] = temp;
+        myCards[52 + (i+12)] = temp;
+        myCards[104 + (i+12)] = temp;
+        myCards[156 + (i+12)] = temp;
+        myCards[208 + (i+12)] = temp;
+        myCards[260 + (i+12)] = temp;
+        myCards[312 + (i+12)] = temp;
+        myCards[364 + (i+12)] = temp;
     }
     s = Card::hearts;
     for (i=1; i <= 13; i++){
         Card temp(i, s);
         myCards[i+25] = temp;
+        myCards[52 + (i+25)] = temp;
+        myCards[104 + (i+25)] = temp;
+        myCards[156 + (i+25)] = temp;
+        myCards[208 + (i+25)] = temp;
+        myCards[260 + (i+25)] = temp;
+        myCards[312 + (i+25)] = temp;
+        myCards[364 + (i+25)] = temp;
     }
     s = Card::diamonds;
     for (i=1; i <= 13 ; i++){
         Card temp(i, s);
         myCards[i+38] = temp;
+        myCards[52 + (i+38)] = temp;
+        myCards[104 + (i+38)] = temp;
+        myCards[156 + (i+38)] = temp;
+        myCards[208 + (i+38)] = temp;
+        myCards[260 + (i+38)] = temp;
+        myCards[312 + (i+38)] = temp;
+        myCards[364 + (i+38)] = temp;
+    }
+    myIndex = 0;
+    srand(time(NULL));
+}
+
+void Deck::reset(){
+    int i = 0;                          //position in deck
+    Card::Suit s = Card::spades;
+    for (i=1; i <= 13; i++){
+        Card temp(i, s);
+        myCards[i-1] = temp;
+        myCards[52 + (i-1)] = temp;
+        myCards[104 + (i-1)] = temp;
+        myCards[156 + (i-1)] = temp;
+        myCards[208 + (i-1)] = temp;
+        myCards[260 + (i-1)] = temp;
+        myCards[312 + (i-1)] = temp;
+        myCards[364 + (i-1)] = temp;
+    }
+    s = Card::clubs;
+    for (i=1; i <= 13; i++){
+        Card temp(i, s);
+        myCards[i+12] = temp;
+        myCards[52 + (i+12)] = temp;
+        myCards[104 + (i+12)] = temp;
+        myCards[156 + (i+12)] = temp;
+        myCards[208 + (i+12)] = temp;
+        myCards[260 + (i+12)] = temp;
+        myCards[312 + (i+12)] = temp;
+        myCards[364 + (i+12)] = temp;
+    }
+    s = Card::hearts;
+    for (i=1; i <= 13; i++){
+        Card temp(i, s);
+        myCards[i+25] = temp;
+        myCards[52 + (i+25)] = temp;
+        myCards[104 + (i+25)] = temp;
+        myCards[156 + (i+25)] = temp;
+        myCards[208 + (i+25)] = temp;
+        myCards[260 + (i+25)] = temp;
+        myCards[312 + (i+25)] = temp;
+        myCards[364 + (i+25)] = temp;
+    }
+    s = Card::diamonds;
+    for (i=1; i <= 13 ; i++){
+        Card temp(i, s);
+        myCards[i+38] = temp;
+        myCards[52 + (i+38)] = temp;
+        myCards[104 + (i+38)] = temp;
+        myCards[156 + (i+38)] = temp;
+        myCards[208 + (i+38)] = temp;
+        myCards[260 + (i+38)] = temp;
+        myCards[312 + (i+38)] = temp;
+        myCards[364 + (i+38)] = temp;
     }
     myIndex = 0;
     srand(time(NULL));

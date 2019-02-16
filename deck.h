@@ -21,12 +21,13 @@
 
 class Deck
 {
-  static const int SIZE = 52;
+  static const int SIZE = 52*8;
   
   public:
     
     
     Deck();           // pristine, sorted deck
+    void reset();
 
     void shuffle();   // shuffle the cards in the current deck
     Card dealCard();   // get a card, after 52 are dealt, fail 

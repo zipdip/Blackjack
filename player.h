@@ -33,6 +33,8 @@ class Player
 		string showHand();
 		bool getStatus();
 		int getScore();
+		int getSimScore();
+		int getSimCard();
 };
 
 Player::Player(){
@@ -116,6 +118,41 @@ int Player::getScore(){
 			score += 1;
 	}
 	return score;
+}
+
+int Player::getSimScore(){
+	int nonAces = 0;
+	int aces = 0;
+	int simScore = 0;
+	for (int i=0; i < myHand.size(); i++){
+		if (myHand[i].getRank() == 1)
+				aces ++;
+		else{
+			if (myHand[i].getRank() > 10)
+				nonAces += 10;
+			else
+				nonAces += myHand[i].getRank();
+		}
+	}
+	for (int i=0; i < aces; i++){
+		if ( (nonAces + 11 <= 21) && (simScore < 110) )
+			simScore += 110;
+		else
+			simScore += 1;
+	}
+	simScore += nonAces;
+	return simScore;	
+}
+
+int Player::getSimCard(){
+	int simCard = 0;
+	if (myHand[0].getRank() == 1)
+		simCard = 11;
+	else if (myHand[0].getRank() > 10)
+		simCard = 10;
+	else 
+		simCard = myHand[0].getRank();
+	return simCard;
 }
 #endif	
 	
