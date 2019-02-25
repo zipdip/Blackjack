@@ -18,8 +18,6 @@ Deck::Deck(){
         myCards[156 + (i-1)] = temp;
         myCards[208 + (i-1)] = temp;
         myCards[260 + (i-1)] = temp;
-        myCards[312 + (i-1)] = temp;
-        myCards[364 + (i-1)] = temp;
     }
     s = Card::clubs;
     for (i=1; i <= 13; i++){
@@ -30,8 +28,6 @@ Deck::Deck(){
         myCards[156 + (i+12)] = temp;
         myCards[208 + (i+12)] = temp;
         myCards[260 + (i+12)] = temp;
-        myCards[312 + (i+12)] = temp;
-        myCards[364 + (i+12)] = temp;
     }
     s = Card::hearts;
     for (i=1; i <= 13; i++){
@@ -42,8 +38,6 @@ Deck::Deck(){
         myCards[156 + (i+25)] = temp;
         myCards[208 + (i+25)] = temp;
         myCards[260 + (i+25)] = temp;
-        myCards[312 + (i+25)] = temp;
-        myCards[364 + (i+25)] = temp;
     }
     s = Card::diamonds;
     for (i=1; i <= 13 ; i++){
@@ -54,8 +48,6 @@ Deck::Deck(){
         myCards[156 + (i+38)] = temp;
         myCards[208 + (i+38)] = temp;
         myCards[260 + (i+38)] = temp;
-        myCards[312 + (i+38)] = temp;
-        myCards[364 + (i+38)] = temp;
     }
     myIndex = 0;
     srand(time(NULL));
@@ -72,8 +64,6 @@ void Deck::reset(){
         myCards[156 + (i-1)] = temp;
         myCards[208 + (i-1)] = temp;
         myCards[260 + (i-1)] = temp;
-        myCards[312 + (i-1)] = temp;
-        myCards[364 + (i-1)] = temp;
     }
     s = Card::clubs;
     for (i=1; i <= 13; i++){
@@ -84,8 +74,6 @@ void Deck::reset(){
         myCards[156 + (i+12)] = temp;
         myCards[208 + (i+12)] = temp;
         myCards[260 + (i+12)] = temp;
-        myCards[312 + (i+12)] = temp;
-        myCards[364 + (i+12)] = temp;
     }
     s = Card::hearts;
     for (i=1; i <= 13; i++){
@@ -96,8 +84,6 @@ void Deck::reset(){
         myCards[156 + (i+25)] = temp;
         myCards[208 + (i+25)] = temp;
         myCards[260 + (i+25)] = temp;
-        myCards[312 + (i+25)] = temp;
-        myCards[364 + (i+25)] = temp;
     }
     s = Card::diamonds;
     for (i=1; i <= 13 ; i++){
@@ -108,23 +94,31 @@ void Deck::reset(){
         myCards[156 + (i+38)] = temp;
         myCards[208 + (i+38)] = temp;
         myCards[260 + (i+38)] = temp;
-        myCards[312 + (i+38)] = temp;
-        myCards[364 + (i+38)] = temp;
     }
     myIndex = 0;
-    srand(time(NULL));
+    
 }
 
+int Deck::remainingDecks(){
+    int full = (312-myIndex) / 52;
+    int half = (312-myIndex) % 52;
+    if (half > 13)
+        half = 1;
+    else 
+        half = 0;
+    return (full + half);
+}
 //shuffle
 //PreConditions: Deck object with at least 2 cards
 //shuffles the deck
 void Deck::shuffle(){
+    //srand(time(NULL));
     vector<Card> temp;
     int i = 0;
-    for (int p = myIndex; p < 52; p++){
+    for (int p = myIndex; p < 312; p++){
         temp.push_back(myCards[p]);
     }
-    for (int p = myIndex; p < 52; p++){
+    for (int p = myIndex; p < 312; p++){
         int tempSize = temp.size();
         int randomNum = (rand() % tempSize);
         myCards[p] = temp[randomNum];
@@ -138,7 +132,7 @@ void Deck::shuffle(){
 //deals one card of the deck
 Card Deck::dealCard(){
     Card dealt;
-    if (myIndex < 52){
+    if (myIndex < 312){
         myIndex++;
         dealt = myCards[myIndex-1];
     }
@@ -149,5 +143,5 @@ Card Deck::dealCard(){
 //PreConditions: Deck object
 //returns current size of deck
 int  Deck::size() const{
-    return (52-myIndex);
+    return (312-myIndex);
 }

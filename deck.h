@@ -21,7 +21,7 @@
 
 class Deck
 {
-  static const int SIZE = 52*8;
+  static const int SIZE = 52*6;
   
   public:
     
@@ -33,6 +33,7 @@ class Deck
     Card dealCard();   // get a card, after 52 are dealt, fail 
 
     int  size() const; // # cards left in the deck
+    int remainingDecks();
 
   private:
 

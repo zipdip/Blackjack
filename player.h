@@ -14,7 +14,7 @@ class Player
 	private:
 		
 		string myName;
-		int myCash;
+		double myCash;
 		vector<Card> myHand;
 		
 	public:
@@ -23,18 +23,21 @@ class Player
 		Player(string name, int cash);
 		
 		string getName();
-		int showCash();
-		void removeCash(int cash);
-		void depositCash(int cash);
+		double showCash();
+		void removeCash(double cash);
+		void depositCash(double cash);
 		
 		void addCard(Card c);
+		void removeCard(Card c);
 		void clearHand();
 		string showCard(int i);
+		int showCardValue(int i);
 		string showHand();
 		bool getStatus();
 		int getScore();
 		int getSimScore();
 		int getSimCard();
+		Card showCardClass(int i);
 };
 
 Player::Player(){
@@ -51,16 +54,16 @@ string Player::getName(){
 	return myName;
 }
 
-int Player::showCash(){
+double Player::showCash(){
 	return myCash;
 }
 
-void Player::removeCash(int cash){
+void Player::removeCash(double cash){
 	myCash -= cash;
 	return;
 }
 
-void Player::depositCash(int cash){
+void Player::depositCash(double cash){
 	myCash += cash;
 	return;
 }
@@ -70,8 +73,19 @@ void Player::addCard(Card c){
 	return;
 }
 
+void Player::removeCard(Card c){
+	for (int i=0; i < myHand.size(); i++){
+		if (myHand[i] == c)
+			myHand.erase(myHand.begin() + i);
+	}
+}
+
 string Player::showCard(int i){
 	return (myHand[i].toString());
+}
+
+int Player::showCardValue(int i){
+	return (myHand[i].getRank());
 }
 
 void Player::clearHand(){
@@ -121,27 +135,42 @@ int Player::getScore(){
 }
 
 int Player::getSimScore(){
-	int nonAces = 0;
-	int aces = 0;
 	int simScore = 0;
-	for (int i=0; i < myHand.size(); i++){
-		if (myHand[i].getRank() == 1)
-				aces ++;
-		else{
-			if (myHand[i].getRank() > 10)
-				nonAces += 10;
-			else
-				nonAces += myHand[i].getRank();
+	if (myHand.size() == 2){
+		if (myHand[0].getRank() == myHand[1].getRank()){
+			simScore = myHand[0].getRank() * 10 + myHand[1].getRank();
+			if (simScore == 55)
+				simScore = 10;
+			else if (simScore == 11)
+				simScore = 1111;
 		}
+		if (myHand[0].getRank() > 10 && myHand[1].getRank() > 10)
+			simScore = 110;
 	}
-	for (int i=0; i < aces; i++){
-		if ( (nonAces + 11 <= 21) && (simScore < 110) )
-			simScore += 110;
-		else
-			simScore += 1;
+	if (simScore == 0){
+		int aces = 0;
+		for (int i=0; i < myHand.size(); i++){
+			if (myHand[i].getRank() == 1)
+				aces ++;
+			else{
+				if (myHand[i].getRank() > 10)
+					simScore += 10;
+				else
+					simScore += myHand[i].getRank();
+			}
 	}
-	simScore += nonAces;
-	return simScore;	
+		for (int i=0; i < aces; i++){
+			if (simScore + 11 < 21)
+				simScore += 110;
+			else if (simScore + 11 == 21)
+				simScore = 21;
+			else 
+				simScore += 1;
+		}
+		if (simScore == 120)
+			simScore = 21;
+	}
+	return simScore;
 }
 
 int Player::getSimCard(){
@@ -154,5 +183,10 @@ int Player::getSimCard(){
 		simCard = myHand[0].getRank();
 	return simCard;
 }
+
+Card Player::showCardClass(int i){
+	return myHand[i];
+}
+
 #endif	
 	
